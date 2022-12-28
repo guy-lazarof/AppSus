@@ -12,7 +12,6 @@ const Router = ReactRouterDOM.HashRouter
 export function App() {
     return <Router>
         <section className="app">
-            <h1>test</h1>
             <AppHeader />
             <Routes>
                 <Route path="/" element={<Home />} />

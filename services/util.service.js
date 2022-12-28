@@ -6,6 +6,9 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    saveToStorage,
+    loadFromStorage,
+    convertTimestampToHour,
 }
 
 function makeId(length = 6) {
@@ -60,3 +63,36 @@ function getMonthName(date) {
     ]
     return monthNames[date.getMonth()]
 }
+
+function saveToStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+function loadFromStorage(key) {
+    const data = localStorage.getItem(key)
+    return (data) ? JSON.parse(data) : undefined
+}
+
+function convertTimestampToHour(timestamp) {
+    const date = new Date(timestamp);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = 'AM'
+  
+    // Convert hours to 12-hour format
+    if (hours > 12) {
+      hours -= 12
+      ampm = 'PM'
+    } else if (hours === 0) {
+      // Convert 0 to 12
+      hours = 12
+    }
+  
+    // Add leading zeroes to minutes if needed
+    if (minutes < 10) {
+      minutes = `0${minutes}`
+    }
+  
+    return `${hours}:${minutes} ${ampm}`
+  }
+  
