@@ -1,3 +1,11 @@
+/* vars */
+
 :root {
-  --mail-bg-color: lightblue;
+  /* background-color */
+  --mail-clr0: #f6f8fc;
+
+  /* bp */
+  /* --s: 600px;
+  --m: 740px;
+  --l: 980px; */
 }

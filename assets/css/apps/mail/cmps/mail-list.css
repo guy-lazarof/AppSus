@@ -1,0 +1,11 @@
+.mail-list,
+ul {
+    list-style-type: none;
+}
+
+.mail-list,li {
+    box-shadow: rgb(170, 170, 170) 0px -1px 0px 0px inset;
+    min-height: 3em;
+    align-items: center;
+}
+
