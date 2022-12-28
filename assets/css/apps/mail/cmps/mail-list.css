@@ -6,6 +6,18 @@ ul {
 .mail-list,li {
     box-shadow: rgb(170, 170, 170) 0px -1px 0px 0px inset;
     min-height: 3em;
-    align-items: center;
+    line-height: 3em;
+}
+
+li.mails:hover {
+scale: 1.02;
+}
+
+.fa-tag {
+    opacity: 0;
+}
+
+.bold {
+font-weight: bold;
 }
 
