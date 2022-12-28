@@ -1,6 +1,6 @@
 import { NotePreview } from './note-preview.jsx';
 
-//const { Link } = ReactRouterDOM
+const { Link } = ReactRouterDOM
 
 export function NoteList({ notes }) {
     return (
@@ -8,7 +8,9 @@ export function NoteList({ notes }) {
             {
                 notes.map(note => <li key={note.id}>
                     <NotePreview note={note} />
-                </li>)
+
+                </li>
+                )
             }
         </ul>
     )
