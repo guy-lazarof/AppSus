@@ -1,0 +1,6 @@
+.grid-note-list-container{
+  list-style-type: none; /* Remove bullets */
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(500px, 520px) );
+  gap: 20px;
+}
