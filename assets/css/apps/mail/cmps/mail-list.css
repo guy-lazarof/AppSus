@@ -4,7 +4,7 @@ ul {
 }
 
 .mail-list,li {
-    box-shadow: rgb(170, 170, 170) 0px -1px 0px 0px inset;
+    border: 0.005em solid lightgray;
     min-height: 3em;
     line-height: 3em;
 }

@@ -1,0 +1,7 @@
+.mail-details {
+    border: .5px solid gray;
+}
+
+.mail-details .mail-head .side {
+    min-width: 10em;
+}

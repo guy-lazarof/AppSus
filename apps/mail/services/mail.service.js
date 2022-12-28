@@ -6,6 +6,7 @@ _createMails()
 
 export const emailService = {
     query,
+    get,
 }
 
 const loggedinUser = {
@@ -18,6 +19,10 @@ function query(criteria) {
         .then(mails => {
             return mails
         })
+}
+
+function get(mailId){
+return storageService.get(MAIL_KEY, mailId)
 }
 
 function _createMails() {

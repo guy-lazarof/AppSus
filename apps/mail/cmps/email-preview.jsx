@@ -10,7 +10,7 @@ export function EmailPreview({ mail }) {
     const shortTxt = (mainTxt.length > 100) ? `${mainTxt.substring(0, 100)}...` : mainTxt
     
     return <article className="mail-preview flex space-between align-center" 
-    onClick={() => { window.location.href = `/#/mail/edit/${mail.id}` }}>
+    onClick={() => { window.location.href = `/#/mail/${mail.id}` }}>
         
         <div className = "fa flex space-between">
         <i className="fa-regular fa-square"></i>
