@@ -5,4 +5,10 @@
   grid-auto-columns: minmax(100px, content);
   gap: 20px;
   /* width: auto; */
+  /* align-items: center;
+      grid-auto-flow: dense;
+      justify-content: center;
+      justify-items: center;
+      grid-auto-rows: minmax(220px, min-content);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
 }

@@ -1,6 +1,6 @@
 // import { utilService } from './util.service.js'
-import { storageService } from '../../../services/async-storage.service.js'
-import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js';
+import { utilService } from '../../../services/util.service.js';
 
 const NOTE_KEY = 'noteDB'
 _createNotes()
@@ -21,11 +21,17 @@ function query(filterBy = getDefaultFilter()) {
         const regex = new RegExp(filterBy.txt, 'i')
         notes = notes.filter(note => regex.test(note.info.title))
       }
-      // if (filterBy.importance) {
-      //   notes = notes.filter(note => note.maxSpeed >= filterBy.minSpeed)
-      // }
+      if (filterBy.noteType === 'all') {
+        console.log('allNotes:', notes)
+        return notes
+      }
+      notes = notes.filter(note => note.noteType === filterBy.noteType)
+      // console.log('notes with filter:', note.noteType)
+
       return notes
-    })
+
+    }
+    )
 }
 
 function get(noteId) {
@@ -45,35 +51,35 @@ function save(note) {
   }
 }
 
-function getEmptyNote(type = '', info = '') {
-  return { type, info }
+function getEmptyNote(noteType = '', info = '') {
+  return { noteType, info }
 }
 
 function getDefaultFilter() {
-  return { txt: '' }
+  return { txt: '', noteType: 'all' }
 }
 
 function _createNotes() {
   let notes = utilService.loadFromStorage(NOTE_KEY)
   if (!notes || !notes.length) {
     notes = []
-    notes.push(_createNote('note-txt', {
+    notes.push(_createNote('text', {
       txt: "txttt!",
-      title: "first txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txt"
+      title: "15 first txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txt"
     }))
-    notes.push(_createNote('note-txt', {
+    notes.push(_createNote('text', {
       txt: "txt!",
       title: "second txt"
     }))
-    notes.push(_createNote('note-img', {
+    notes.push(_createNote('img', {
       url: "http://some-img/me",
       title: "first img"
     }))
-    notes.push(_createNote('note-img', {
+    notes.push(_createNote('img', {
       url: "http://some-img/me",
       title: "second img"
     }))
-    notes.push(_createNote('note-todos', {
+    notes.push(_createNote('todos-list', {
       label: "family",
       title: "first todos",
       todos: [
@@ -87,7 +93,7 @@ function _createNotes() {
         }]
     }
     ))
-    notes.push(_createNote('note-todos', {
+    notes.push(_createNote('todos-list', {
       label: "friends",
       title: "second todos",
       todos: [
@@ -100,11 +106,11 @@ function _createNotes() {
           doneAt: 187111111
         }]
     }))
-    notes.push(_createNote('note-video', {
+    notes.push(_createNote('video', {
       url: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
       title: "first video"
     }))
-    notes.push(_createNote('note-video', {
+    notes.push(_createNote('video', {
       url: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
       title: "second video"
     }))
@@ -112,8 +118,8 @@ function _createNotes() {
   }
 }
 
-function _createNote(type, info) {
-  const note = getEmptyNote(type, info)
+function _createNote(noteType, info) {
+  const note = getEmptyNote(noteType, info)
   note.id = utilService.makeId()
   return note
 }
