@@ -1,8 +1,8 @@
 .note-preview{
-  justify-items: center;
-  background-color: rgb(176, 190, 147);
+  text-align: left;
+  background-color: rgb(234, 232, 232);
   /* width: 100; */
+  border: solid 1px rgb(226, 226, 226);
   padding: 10px;
   border-radius: 15px;
-
 }

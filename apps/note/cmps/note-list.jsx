@@ -4,14 +4,14 @@ const { Link } = ReactRouterDOM
 
 export function NoteList({ notes }) {
     return (
-        <ul className="grid-note-list-container">
+        <div className="grid-note-list-container">
             {
-                notes.map(note => <li key={note.id}>
+                notes.map(note => <div key={note.id}>
                     <NotePreview note={note} />
 
-                </li>
+                </div>
                 )
             }
-        </ul>
+        </div>
     )
 }

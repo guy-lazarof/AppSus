@@ -3,7 +3,7 @@ import { storageService } from '../../../services/async-storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
 const NOTE_KEY = 'noteDB'
-// _createNotes()
+_createNotes()
 
 export const noteService = {
   query,
@@ -54,22 +54,65 @@ function getDefaultFilter() {
 }
 
 function _createNotes() {
-  let cars = utilService.loadFromStorage(NOTE_KEY)
-  if (!cars || !cars.length) {
-    cars = []
-    cars.push(_createCar('audu', 300))
-    cars.push(_createCar('fiak', 120))
-    cars.push(_createCar('subali', 50))
-    cars.push(_createCar('mitsu', 150))
-    cars.push(_createCar('audu', 250))
-    cars.push(_createCar('fiak', 180))
-    cars.push(_createCar('subali', 35))
-    cars.push(_createCar('mitsu', 135))
-    utilService.saveToStorage(NOTE_KEY, cars)
+  let notes = utilService.loadFromStorage(NOTE_KEY)
+  if (!notes || !notes.length) {
+    notes = []
+    notes.push(_createNote('note-txt', {
+      txt: "txttt!",
+      title: "first txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txt"
+    }))
+    notes.push(_createNote('note-txt', {
+      txt: "txt!",
+      title: "second txt"
+    }))
+    notes.push(_createNote('note-img', {
+      url: "http://some-img/me",
+      title: "first img"
+    }))
+    notes.push(_createNote('note-img', {
+      url: "http://some-img/me",
+      title: "second img"
+    }))
+    notes.push(_createNote('note-todos', {
+      label: "family",
+      title: "first todos",
+      todos: [
+        {
+          txt: "make dinner",
+          doneAt: null
+        },
+        {
+          txt: "make breakfast",
+          doneAt: 187111111
+        }]
+    }
+    ))
+    notes.push(_createNote('note-todos', {
+      label: "friends",
+      title: "second todos",
+      todos: [
+        {
+          txt: "meeting tonight",
+          doneAt: null
+        },
+        {
+          txt: "learn together",
+          doneAt: 187111111
+        }]
+    }))
+    notes.push(_createNote('note-video', {
+      url: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
+      title: "first video"
+    }))
+    notes.push(_createNote('note-video', {
+      url: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
+      title: "second video"
+    }))
+    utilService.saveToStorage(NOTE_KEY, notes)
   }
 }
 
-function _createNotes(type, info) {
+function _createNote(type, info) {
   const note = getEmptyNote(type, info)
   note.id = utilService.makeId()
   return note
