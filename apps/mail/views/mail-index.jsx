@@ -7,29 +7,12 @@ import { MailFilter } from '../cmps/email-filter.jsx';
 import { emailService } from '../services/mail.service.js';
 
 
-export function MailIndex() {
-
-    const [isLoading, setIsLoading] = useState(false)
-    const [mails, setMails] = useState([])
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        setIsLoading(true)
-        loadMails()
-    }, [])
-
-    function loadMails() {
-        emailService.query().then(mailsToUpdate => {
-            setMails(mailsToUpdate)
-            setIsLoading(false)
-        })
-    }
+export function MailIndex({mails, onSetFilter, isLoading} ) {
 
     function onRemoveMail(mailId) {
         emailService.remove(mailId).then(() => {
             const updatedMails = mails.filter(mail => mail.id !== mailId)
             setMails(updatedMails)
-            console.log('d')
         })
             .catch((err) => {
                 console.log('Had issues removing', err)
@@ -48,7 +31,7 @@ export function MailIndex() {
     }
 
     return <section className="mail-index full main-layout">
-        {!isLoading && <MailFilter mails={mails} onSaveMail={onSaveMail} />}
+        {!isLoading && <MailFilter mails={mails} onSaveMail={onSaveMail} onSetFilter={onSetFilter} />}
         {!isLoading && <MailList mails={mails} onRemoveMail={onRemoveMail} />}
     </section>
 }

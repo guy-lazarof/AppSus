@@ -1,5 +1,5 @@
 import { MailIndex } from './apps/mail/views/mail-index.jsx';
-import { MailEdit } from './apps/mail/views/mail-edit.jsx';
+import { MailApp } from './apps/mail/views/mail-app.jsx';
 import { MailDetails } from './apps/mail/views/mail-details.jsx';
 import { NoteIndex } from './apps/note/views/note-index.jsx';
 import { AppHeader } from './cmps/app-header.jsx';
@@ -18,10 +18,9 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/mail" element={<MailIndex />} />
-                <Route element={<MailEdit />} path="/mail/edit/" />
-                <Route element={<MailEdit />} path="/mail/edit/:mailId" />
-                <Route element={<MailDetails />} path="/mail/:mailId" />
+                <Route path="/mail" element={<MailApp />} />
+                {/* <Route path="/mail" element={<MailIndex />} /> */}
+                <Route path="/mail/:mailId" element={<MailDetails />}  />
                 <Route path="/note" element={<NoteIndex />} />
             </Routes>
         </section>

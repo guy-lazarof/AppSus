@@ -12,24 +12,23 @@ export function EmailPreview({ mail, onRemoveMail }) {
     const isMailRead = mail.isRead
     const shortTxt = (mainTxt.length > 100) ? `${mainTxt.substring(0, 100)}...` : mainTxt
 
-    return <article className="mail-preview flex space-between align-center"
+    return <tbody><tr className="mail-preview flex space-between align-center"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => { window.location.href = `/#/mail/${mail.id}` }}>
+        
+        <td> <i className="fa-regular fa-square"></i></td>
+        <td> <i className="fa-regular fa-star"></i></td>
+        <td> <i className="fa-solid fa-tag"></i></td>
 
-        <div className="fa flex space-between">
-            <i className="fa-regular fa-square"></i>
-            <i className="fa-regular fa-star"></i>
-            <i className="fa-solid fa-tag"></i>
-        </div>
-        <div className={isMailRead ? "mail-subject" : "mail-subject bold"}>{mail.author}</div>
-        <div className={isMailRead ? "mail-body" : "mail-subject bold"}>{shortTxt}</div>
-        <div className={isMailRead ? "mail-time" : "mail-subject bold"}>{sentAt}</div>
-        {isHovered && <i className="fa-solid fa-trash-can" onClick={(event) => {
+        <td className={isMailRead ? "mail-subject" : "mail-subject bold"}>{mail.author}</td>
+        <td className={isMailRead ? "mail-body" : "mail-subject bold"}>{shortTxt}</td>
+        <td className={isMailRead ? "mail-time" : "mail-subject bold"}>{sentAt}</td>
+        <td>{isHovered && <i className="fa-solid fa-trash-can" onClick={(event) => {
             onRemoveMail(mail.id)
             event.stopPropagation()
-        }}></i>}
-        {isHovered && <i className="fa-regular fa-envelope"></i>}
-    </article>
+        }}></i>}</td>
+        <td>{isHovered && <i className="fa-regular fa-envelope"></i>}</td>
+    </tr></tbody>
 
 }

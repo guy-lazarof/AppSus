@@ -10,6 +10,7 @@ export const emailService = {
     remove,
     getEmptyMail,
     save,
+    getDefaultFilter
 }
 
 const loggedinUser = {
@@ -19,38 +20,63 @@ const loggedinUser = {
 
 function save(mail) {
     if (mail.id) {
-      return storageService.put(MAIL_KEY, mail)
+        return storageService.put(MAIL_KEY, mail)
     } else {
-      return storageService.post(MAIL_KEY, mail)
+        return storageService.post(MAIL_KEY, mail)
     }
-  }
-  
-
-function getEmptyMail(){
-return {
-    author: '',
-    id: '',
-    subject: '',
-    body: '',
-    isRead: true,
-    sentAt: '',
-    from: '',
-    removedAt : null,
-    to: ''
 }
+
+
+function getEmptyMail() {
+    return {
+        author: '',
+        id: '',
+        subject: '',
+        body: '',
+        isRead: true,
+        sentAt: '',
+        from: '',
+        removedAt: null,
+        to: ''
+    }
 }
 function remove(mailId) {
     return storageService.remove(MAIL_KEY, mailId)
-  }
+}
+
 function query(criteria) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            return mails
-        })
+            switch (criteria) {
+                case 'inbox':
+                    mails = mails.filter(mail => mail.from !== loggedinUser.email)
+                    break;
+                case 'sent':
+                    mails = mails.filter(mail => mail.from === loggedinUser.email)
+                    break;
+                default:
+                    break;
+            }
+            if (criteria.subject) {
+                const regex = new RegExp(criteria.subject, 'i')
+                mails = mails.filter(mail => regex.test(mail.subject))
+              }
+              if (criteria.author) {
+                const regex = new RegExp(criteria.author, 'i')
+                mails = mails.filter(mail => regex.test(mail.author))
+              }
+            return mails;
+        });
 }
 
-function get(mailId){
-return storageService.get(MAIL_KEY, mailId)
+function get(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+}
+
+function getDefaultFilter() {
+    return {
+        subject: '', author: '',
+    }
 }
 
 function _createMails() {
@@ -65,7 +91,7 @@ function _createMails() {
                 isRead: true,
                 sentAt: 1551133930594,
                 from: 'shuki@gmail.com',
-                removedAt : null,
+                removedAt: null,
                 to: 'user@appsus.com'
 
             },
@@ -77,7 +103,7 @@ function _createMails() {
                 isRead: false,
                 sentAt: 15511033930593,
                 from: 'raanan@walla.com',
-                removedAt : null,
+                removedAt: null,
                 to: 'user@appsus.com'
             },
             {
@@ -88,7 +114,7 @@ function _createMails() {
                 isRead: true,
                 sentAt: 1556133930593,
                 from: 'koko@gamil.com',
-                removedAt : null,
+                removedAt: null,
                 to: 'user@appsus.com'
             },
             {
@@ -99,7 +125,7 @@ function _createMails() {
                 isRead: true,
                 sentAt: 1555133930593,
                 from: 'avis-hostel@gmail.com',
-                removedAt : null,
+                removedAt: null,
                 to: 'user@appsus.com'
             },
             {
@@ -110,7 +136,7 @@ function _createMails() {
                 isRead: true,
                 sentAt: 15511339398793,
                 from: 'likus@israel.com',
-                removedAt : null,
+                removedAt: null,
                 to: 'user@appsus.com'
             },
             {
@@ -121,7 +147,7 @@ function _createMails() {
                 isRead: true,
                 sentAt: 155113393093,
                 from: 'maccabi@gmail.com',
-                removedAt : null,
+                removedAt: null,
                 to: 'user@appsus.com'
             },
         ]

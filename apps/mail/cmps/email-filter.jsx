@@ -6,18 +6,18 @@ import { MailCompose } from './email-compose.jsx';
 import { emailService } from '../services/mail.service.js';
 import { utilService } from '../../../services/util.service.js';
 
-export function MailFilter({ onSaveMail }) {
+export function MailFilter({ onSaveMail, onSetFilter }) {
 
     const [isCompose, setIsCompose] = useState(false)
     const [mail, setMail] = useState(emailService.getEmptyMail())
-    const navigate = useNavigate()
-    
+
     function onSubmiMail(ev) {
         ev.preventDefault()
         mail.from = 'user@appsus.com'
         mail.author = 'Mahatma Appsus'
         mail.sentAt = Date.now()
         onSaveMail(mail)
+        setIsCompose(!isCompose)
     }
 
     function handleChange({ target }) {
@@ -26,14 +26,13 @@ export function MailFilter({ onSaveMail }) {
             return { ...prevMail, [field]: value }
         }))
     }
-
     return <section className="mail-filter">
         <ul className="filter">
-            <div onClick={() => setIsCompose(!isCompose)}><i className="fa-regular fa-pen-to-square"></i> Compose</div>
-            <li>Inbox</li>
-            <li>Starred</li>
-            <li>Sent Mail</li>
-            <li>Drafts</li>
+            <li  className ="compose" onClick={() => setIsCompose(!isCompose)}><i className="compose fa-regular fa-pen-to-square"></i> Compose</li>
+            <li onClick={() => onSetFilter('inbox')}><i className="fa-solid fa-inbox"></i>Inbox</li>
+            <li onClick={() => onSetFilter('stared')}><i className="fa-regular fa-star"></i>Stared</li>
+            <li onClick={() => onSetFilter('sent')}><i className="fa-solid fa-caret-right"></i>Sent</li>
+            <li onClick={() => onSetFilter('drafts')}><i className="fa-regular fa-folder"></i>Drafts</li>
         </ul>
         {isCompose && <MailCompose onSubmiMail={onSubmiMail} handleChange={handleChange} />}
     </section>

@@ -1,0 +1,39 @@
+.header {
+    background-color: var(--mail-clr0);
+
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    min-height: 4em;
+}
+
+.header .logo-area {
+    min-width: 15em;
+    margin-left: 1em;
+}
+
+.search-form {
+    background-color: #cccccc;
+    border-radius: 16px;
+    min-height: 2em;
+}
+
+.search-form .search-mail {
+    background-color: #cccccc;
+    border: 0;
+    border-radius: 16px;
+    min-height: 2em;
+}
+
+.search-form .search-mail:focus {
+    background-color: #ffffff;
+}
+
+.header .search-form select,
+.header .search-form button {
+    border: none;
+    border-radius: 16px;
+    background-color: #cccccc;
+}

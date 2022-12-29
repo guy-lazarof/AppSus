@@ -1,0 +1,37 @@
+  .mail-filter .filter li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: .9em;
+    font-weight: 500;
+    color: #637282;
+  }
+  
+  .mail-filter .filter li.active {
+    background-color: #FFFFFF;
+    border-bottom:.2em solid #0052CC;
+    color: #000000;
+  }
+  
+  .mail-filter .filter li:hover {
+    background-color: lightgray;
+  }
+  
+  .mail-filter .filter i {
+    margin-right: 1em;
+    min-width: 1em;
+  }
+  
+  .mail-filter .filter li.compose {
+    cursor: pointer;
+    color: #5f6368;
+    background-color: #ffffff;
+    border: .5px solid #5f6368;
+    border-radius: 16px;
+    height: 56px;
+    padding: 0 24px 0 0;
+    min-width: 96px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    font-weight: 500;
+  }
+  

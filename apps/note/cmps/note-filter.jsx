@@ -18,8 +18,9 @@ export function NoteFilter({ onSetFilter }) {
 
   function handleChange({ target }) {
     let { name: field, type } = target
-    value = (type === 'number') ? +value : value
+    // value = (type === 'number') ? +value : value
     setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+    console.log(prevFilter);
   }
 
   function onSubmitFilter(ev) {
@@ -49,8 +50,6 @@ export function NoteFilter({ onSetFilter }) {
   // console.log('elInputRef', elInputRef);
   return <section className="note-filter full main-layout">
     <h2>Filter our notes</h2>
-    {console.log(filterByToEdit)}
-    {console.log(elInputRef)}
     <form onSubmit={onSubmitFilter}>
       <label htmlFor="txt">text:</label>
       <input type="text"
