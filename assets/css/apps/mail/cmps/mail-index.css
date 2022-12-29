@@ -1,4 +1,15 @@
-.mail-index{
+.mail-index {
     background-color: var(--mail-clr0);
     font-family: sans-serif;
+    display: grid;
+    grid-template-columns: .5fr 3fr;
+    grid-template-rows: auto;
+}
+ul {
+    list-style-type: none;
+}
+
+.mail-filter li{
+    min-height: 3em;
+    line-height: 3em;
 }

@@ -1,9 +1,10 @@
-.mail-list,
-ul {
-    list-style-type: none;
+ul.mail-list
+{
+    padding-inline-start: 0px;
+
 }
 
-.mail-list,li {
+li.mail-list {
     border: 0.005em solid lightgray;
     min-height: 3em;
     line-height: 3em;
@@ -20,4 +21,5 @@ scale: 1.02;
 .bold {
 font-weight: bold;
 }
+
 
