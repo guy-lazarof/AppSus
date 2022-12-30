@@ -1,10 +1,13 @@
 const { useEffect, useState } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useParams, useNavigate, useLocation } = ReactRouterDOM
+
 
 import { emailService } from '../services/mail.service.js';
 import { utilService } from '../../../services/util.service.js';
 
-export function MailDetails(){
+import { MailFilter } from '../cmps/email-filter.jsx';
+
+export function MailDetails() {
 
     const [mail, setMail] = useState(null)
     const { mailId } = useParams()
@@ -18,6 +21,8 @@ export function MailDetails(){
     useEffect(() => {
         if (mail) {
             setSentAt(utilService.convertTimestampToHour(mail.sentAt))
+            mail.isRead = true
+            emailService.save(mail)
         }
     }, [mail])
 
@@ -32,19 +37,28 @@ export function MailDetails(){
             })
     }
 
+    function onRemoveMail(mailId) {
+        emailService.remove(mailId).then(() => {
+            navigate('/mail')
+        })
+            .catch((err) => {
+                console.log('Had issues removing', err)
+            })
+    }
+
     if (!mail) return <div>Loading...</div>
 
     return <section className="mail-details">
-        <h1>{mail.subject}</h1>
-        <div className="mail-head flex space-between">
-        <span className="sender">{mail.author}</span>
-        <div className="mail-head side flex space-between">
-        <span className="sender"><i className="fa-regular fa-star"></i></span>
-        <span className="time">{sentAt}</span>
-        <span className="trash"><i className="fa-solid fa-trash-can"></i></span>
-
-        </div>
-        </div>
+        <MailFilter />
+        <div className="main"><h1>{mail.subject}</h1>
+            <div className ="main-first-line flex"><span className="sender">{mail.author}
+            <i className="fa-regular fa-star"></i></span>
+            <span className="trash" onClick={(event) => {
+                onRemoveMail(mail.id)
+                event.stopPropagation()
+            }} ><i className="fa-solid fa-trash-can"></i></span></div>
+            <span className="time">{sentAt}</span>
         <p>{mail.body}</p>
+        </div>
     </section>
 }

@@ -1,11 +1,18 @@
 const { Link } = ReactRouterDOM
+const { useState, useEffect } = React
 
 import { EmailPreview } from './email-preview.jsx';
-export function MailList({ mails, onRemoveMail }) {
+
+export function MailList({ mails, onRemoveMail, onStarMail, onMarkMail, onImportantMail, markedEmails, setMarkedEmails }) {
+
+    
+
     return <section className="mail-list">
         {
             mails.map(mail => <table key={mail.id} className="mail-list">
-                <EmailPreview mail={mail} onRemoveMail={onRemoveMail} />
+                <EmailPreview mail={mail} onRemoveMail={onRemoveMail} onStarMail={onStarMail}
+                 onMarkMail={onMarkMail} onImportantMail={onImportantMail} 
+                 markedEmails={markedEmails} setMarkedEmails={setMarkedEmails}/>
             </table>)
         }
     </section>

@@ -6,7 +6,7 @@ import { MailCompose } from './email-compose.jsx';
 import { emailService } from '../services/mail.service.js';
 import { utilService } from '../../../services/util.service.js';
 
-export function MailFilter({ onSaveMail, onSetFilter }) {
+export function MailFilter({ onSaveMail, onSetFilter, filterBy }) {
 
     const [isCompose, setIsCompose] = useState(false)
     const [mail, setMail] = useState(emailService.getEmptyMail())
@@ -27,13 +27,13 @@ export function MailFilter({ onSaveMail, onSetFilter }) {
         }))
     }
     return <section className="mail-filter">
-        <ul className="filter">
-            <li  className ="compose" onClick={() => setIsCompose(!isCompose)}><i className="compose fa-regular fa-pen-to-square"></i> Compose</li>
-            <li onClick={() => onSetFilter('inbox')}><i className="fa-solid fa-inbox"></i>Inbox</li>
-            <li onClick={() => onSetFilter('stared')}><i className="fa-regular fa-star"></i>Stared</li>
-            <li onClick={() => onSetFilter('sent')}><i className="fa-solid fa-caret-right"></i>Sent</li>
-            <li onClick={() => onSetFilter('drafts')}><i className="fa-regular fa-folder"></i>Drafts</li>
-        </ul>
-        {isCompose && <MailCompose onSubmiMail={onSubmiMail} handleChange={handleChange} />}
-    </section>
+    <ul className="filter">
+        <li  className ="compose" onClick={() => setIsCompose(!isCompose)}><i className="compose fa-regular fa-pen-to-square"></i> Compose</li>
+        <li onClick={() => onSetFilter('inbox')} className={filterBy === 'inbox' ? 'bold' : ''}><i className="fa-solid fa-inbox"></i>Inbox</li>
+        <li onClick={() => onSetFilter('stared')} className={filterBy === 'stared' ? 'bold' : ''}><i className="fa-regular fa-star"></i>Stared</li>
+        <li onClick={() => onSetFilter('sent')} className={filterBy === 'sent' ? 'bold' : ''}><i className="fa-solid fa-caret-right"></i>Sent</li>
+        <li onClick={() => onSetFilter('drafts')} className={filterBy === 'drafts' ? 'bold' : ''}><i className="fa-regular fa-folder"></i>Drafts</li>
+    </ul>
+    {isCompose && <MailCompose onSubmiMail={onSubmiMail} handleChange={handleChange} />}
+</section>
 }

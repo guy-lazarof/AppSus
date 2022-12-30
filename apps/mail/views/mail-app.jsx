@@ -1,9 +1,9 @@
+const { useState, useEffect } = React
+
 import { MailSearch } from '../views/mail-search.jsx';
 import { MailIndex } from '../views/mail-index.jsx';
 
 import { emailService } from '../services/mail.service.js';
-
-const { useState, useEffect } = React
 
 export function MailApp() {
 
@@ -29,6 +29,6 @@ export function MailApp() {
 
     return <section className="main-layout"><MailSearch mails={mails} onSetFilter={onSetFilter}
      isLoading={isLoading} />
-        <MailIndex mails={mails} onSetFilter={onSetFilter} isLoading={isLoading} />
+        <MailIndex mails={mails} onSetFilter={onSetFilter} isLoading={isLoading} loadMails={loadMails} setMails={setMails} filterBy={filterBy} />
     </section>
 }

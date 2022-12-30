@@ -13,3 +13,7 @@ ul {
     min-height: 3em;
     line-height: 3em;
 }
+
+.bold {
+ font-weight: bold;   
+}

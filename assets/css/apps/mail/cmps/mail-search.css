@@ -1,6 +1,6 @@
 .header {
     background-color: var(--mail-clr0);
-
+    font-family: 'Roboto', sans-serif;
 }
 
 .header {
@@ -16,7 +16,7 @@
 
 .search-form {
     background-color: #cccccc;
-    border-radius: 16px;
+    border-radius: 1em;
     min-height: 2em;
 }
 

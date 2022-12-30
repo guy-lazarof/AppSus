@@ -1,7 +1,51 @@
 .mail-details {
-    border: .5px solid gray;
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f8f8;
+  border-radius: .25em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
 }
 
-.mail-details .mail-head .side {
-    min-width: 10em;
+.mail-details .main {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.mail-details .main h1 {
+  font-size: 1.25em;
+  font-weight: 500;
+  margin: 0 0 .5em;
+}
+
+.mail-details .main .sender {
+  align-items: center;
+  display: flex;
+  font-size: .9em;
+  margin-bottom: .5em;
+}
+
+.mail-details .main .time {
+    color: #b8b8b8;
+    font-size: .9em;
+    margin-bottom: 1em;
+}
+
+.mail-details .main-first-line{
+    color: #b8b8b8;
+}
+.mail-details .main .sender .fa-regular {
+  margin-left: .5em;
+}
+
+.mail-details .main .trash .fa-solid {
+  margin-left: .5em;
+}
+
+
+
+
+.mail-details .main p {
+  line-height: 1.5;
 }
