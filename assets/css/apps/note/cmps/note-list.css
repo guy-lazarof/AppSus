@@ -4,11 +4,61 @@
   grid-template-columns: repeat( auto-fit, minmax(240px, 240px) );
   grid-auto-columns: minmax(100px, content);
   gap: 20px;
-  /* width: auto; */
-  /* align-items: center;
-      grid-auto-flow: dense;
-      justify-content: center;
-      justify-items: center;
-      grid-auto-rows: minmax(220px, min-content);
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
+  margin:100px
+}
+
+.note-preview{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  text-align: left;
+  background-color: #ffffff;
+  border: solid 1px #e0e0e0;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+}
+
+.note-pin-title{
+display: flex;
+justify-content: space-between;
+gap: 10px;
+}
+
+.note-content{
+
+}
+
+.note-edit-nav{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.note-preview:hover{
+  border: solid 1px #e0e0e0;
+  box-shadow:0.5px 0.5px 2px 1px rgba(118, 117, 117, 0.8)
+}
+
+
+.note-edit-nav{
+  opacity: 0.00000001;
+transition-duration: 0.4s;
+height: 40px;
+} 
+.note-preview:hover .note-edit-nav{
+  opacity: 1; 
+}
+
+.note-edit-nav > li{
+  display: inline;
+  margin: 15px;
+  font-size: 20px;
+} 
+
+.note-edit-nav > li:hover{
+  /* background-color: rgb(144, 150, 150); */
+  border-radius: 50px;
+  box-shadow: 0px 0px 20px 5px rgba(100, 98, 98, 0.8);
 }

@@ -1,19 +1,22 @@
+import { NewNote } from '../cmps/new-note.jsx';
 import { NoteList } from '../cmps/note-list.jsx';
 import { TopAppBar } from '../cmps/top-app-bar.jsx';
 import { noteService } from '../services/note.service.js';
 
-const { useState } = React
+const { useState, useRef } = React
 const { Link } = ReactRouterDOM
 
 export function NoteIndex() {
 
     const [filterByState, setFilterByState] = useState(noteService.getDefaultFilter())
+    const { newNoteState, setNewNoteState } = useState(null)
 
     return (
         <section className="Note-index">
             {/* <Link to="/note/edit">Add Note</Link> */}
-            <TopAppBar currentFilter={filterByState} setFilter={setFilterByState} />
-            <NoteList filterBy={filterByState} />
+            <TopAppBar setFilter={setFilterByState} />
+            {/* <NewNote setNewNote={setNewNoteState} /> */}
+            <NoteList filterBy={filterByState} newNote={newNoteState} />
         </section>
     )
 }

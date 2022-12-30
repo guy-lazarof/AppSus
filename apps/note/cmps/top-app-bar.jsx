@@ -1,11 +1,13 @@
-const { useRef, useEffect } = React;
+const { useRef, useEffect, useState } = React;
 
-export function TopAppBar({ currentFilter, setFilter }) {
+export function TopAppBar({ setFilter }) {
   const elInputRef = useRef(null)
 
-  useEffect(() => {
-    elInputRef.current.focus()
-  }, [])
+  const [showFilterSelectState, setShowFilterSelectState] = useState(false)
+
+  // useEffect(() => {
+  //   elInputRef.current.focus()
+  // }, [])
 
   function updateFilter(ev) {
     ev.preventDefault()
@@ -13,47 +15,58 @@ export function TopAppBar({ currentFilter, setFilter }) {
     console.log('field:', field)
     console.log('target:', ev.target)
     console.log('value:', value)
-    setFilter((currentFilter) => {
-      const x = {
-        ...currentFilter,
+    setFilter((prevFilter) => {
+      return {
+        ...prevFilter,
         [field]: value
       }
-      console.log('x:', x)
-      return x
     })
   }
+  function showFilterSelect() {
+    setShowFilterSelectState(() => true)
+  }
+  function hideFilterSelect() {
+    setShowFilterSelectState(() => null)
+  }
+
 
   return (
     <div className='top-app-bar'>
-      <h2>Filter our notes</h2>
-      <form onSubmit={updateFilter}>
-        <label htmlFor="note-txt">text:</label>
+      <div className='note-logo'> Keep <i className="note-logo-icon fa-regular fa-lightbulb"></i></div>
+
+      <form className='note-filter' >
         <input type="text"
           id="note-txt"
           name="txt"
-          placeholder="By text"
-          // value={}//setFilter?
+          placeholder="Search note"
           onChange={updateFilter}
           ref={elInputRef}
+          className='note-search'
+          onFocus={() => showFilterSelect()}
         />
-        <br />
-        <label htmlFor="noteType">type:</label>
-        <select
-          id="noteType"
-          name="noteType"
-          placeholder="By note type"
-          // value={filterByToEditState.noteType}//setFilter?
-          onChange={updateFilter}>
-          <option value="all">all</option>
-          <option value="text">text</option>
-          <option value="todos-list">todos-list</option>
-          <option value="img">img</option>
-          <option value="video">video</option>
-        </select>
 
-        <button>Filter notes!</button>
+        {showFilterSelectState &&
+
+          <select
+            id="noteType"
+            name="noteType"
+            placeholder="By note type"
+            onChange={updateFilter}
+            className='note-filter-select'
+          >
+
+            <option value="all">all</option>
+            <option value="text">text</option>
+            <option value="todos-list">todos-list</option>
+            <option value="img">img</option>
+            <option value="video">video</option>
+          </select>}
       </form>
-      {/* {console.log(':',)} */}
-    </div>
+      <div className='note-top-buttons'>
+        <i className="fa-solid fa-gear"></i>
+        <i className="fa-regular fa-rectangle-list"></i>
+        <i className="fa-solid fa-rotate-right"></i>
+      </div>
+    </div >
   )
-}
+} 

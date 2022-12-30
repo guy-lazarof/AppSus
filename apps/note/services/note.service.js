@@ -19,14 +19,13 @@ function query(filterBy = getDefaultFilter()) {
     .then(notes => {
       if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        notes = notes.filter(note => regex.test(note.info.title))
+        notes = notes.filter(note => regex.test(note.title))
       }
       if (filterBy.noteType === 'all') {
         console.log('allNotes:', notes)
         return notes
       }
       notes = notes.filter(note => note.noteType === filterBy.noteType)
-      // console.log('notes with filter:', note.noteType)
 
       return notes
 
@@ -51,35 +50,78 @@ function save(note) {
   }
 }
 
-function getEmptyNote(noteType = '', info = '') {
-  return { noteType, info }
+function getEmptyNote() {
+  return {
+    id: null,
+    noteType: "text",
+    backgroundColor: "white",
+    txt: null,
+    isPinned: false,
+    title: null,
+    lable: null,
+    todosList: null,
+    imgUrl: null,
+    videoUrl: null
+  }
 }
 
 function getDefaultFilter() {
   return { txt: '', noteType: 'all' }
 }
 
+// const emptyNote = {
+//   id: null,
+//   noteType: "text",
+//   backgroundColor: "white",
+//   txt: null,
+//   isPinned: false,
+//   title: null,
+//   lable: null,
+
+//   imgUrl: null,
+//   videoUrl: null
+// }
+
+function _createNote(arg) {
+  const note = getEmptyNote()
+  note.id = utilService.makeId()
+  for (const property in arg) {
+    note[property] = arg[property]
+    // console.log('property:', property)
+    // console.log('note.property', note.property)
+    // console.log('arg[property]:', arg[property])
+  }
+  return note
+}
+
+
+
 function _createNotes() {
   let notes = utilService.loadFromStorage(NOTE_KEY)
   if (!notes || !notes.length) {
     notes = []
-    notes.push(_createNote('text', {
+    notes.push(_createNote({
+      noteType: 'text',
       txt: "txttt!",
-      title: "15 first txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txtfirst txt"
+      title: "15 first txtfirstxt"
     }))
-    notes.push(_createNote('text', {
+    notes.push(_createNote({
+      noteType: 'text',
       txt: "txt!",
       title: "second txt"
     }))
-    notes.push(_createNote('img', {
-      url: "http://some-img/me",
+    notes.push(_createNote({
+      noteType: 'img',
+      imgUrl: "http://some-img/me",
       title: "first img"
     }))
-    notes.push(_createNote('img', {
-      url: "http://some-img/me",
+    notes.push(_createNote({
+      noteType: 'img',
+      imgUrl: "http://some-img/me",
       title: "second img"
     }))
-    notes.push(_createNote('todos-list', {
+    notes.push(_createNote({
+      noteType: 'todos-list',
       label: "family",
       title: "first todos",
       todos: [
@@ -93,9 +135,11 @@ function _createNotes() {
         }]
     }
     ))
-    notes.push(_createNote('todos-list', {
+    notes.push(_createNote({
+      noteType: 'todos-list',
       label: "friends",
       title: "second todos",
+      backgroundColor: "#dff698",
       todos: [
         {
           txt: "meeting tonight",
@@ -106,20 +150,17 @@ function _createNotes() {
           doneAt: 187111111
         }]
     }))
-    notes.push(_createNote('video', {
-      url: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
+    notes.push(_createNote({
+      noteType: 'video',
+      videoUrl: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
       title: "first video"
-    }))
-    notes.push(_createNote('video', {
-      url: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
-      title: "second video"
-    }))
+    })),
+      notes.push(_createNote({
+        noteType: 'video',
+        videoUrl: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
+        title: "second video"
+      }))
     utilService.saveToStorage(NOTE_KEY, notes)
   }
 }
 
-function _createNote(noteType, info) {
-  const note = getEmptyNote(noteType, info)
-  note.id = utilService.makeId()
-  return note
-}
