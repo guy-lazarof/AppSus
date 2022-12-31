@@ -1,4 +1,5 @@
 import { eventBusService, showSuccessMsg } from '../../../services/event-bus.service.js';
+import { utilService } from '../../../services/util.service.js';
 import { noteService } from '../services/note.service.js';
 
 const { useState, useEffect, useRef } = React
@@ -8,23 +9,8 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
   const [noteOpenWindowState, setNoteOpenWindowState] = useState(false)
   const elInputRefTitle = useRef(null)
   const elInputRefTxt = useRef(null)
-  // const navigate = useNavigate()
-  // const { noteId } = useParams()
-  let noteId = noteToEdit.id
-  useEffect(() => {
 
-    if (!noteId) return
-    loadNote()
-  }, [])
-
-  function loadNote() {
-    noteService.get(noteId)
-      .then((note) => setNoteToEdit(note))
-      .catch((err) => {
-        console.log('Had issues in note details', err)
-        // navigate('/note')
-      })
-  }
+  let currentNote = noteToEdit
 
   function handleChange({ target }) {
     let { value, name: field } = target
@@ -34,13 +20,12 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
   function onSaveNote(ev) {
     ev.preventDefault()
     if (validValue()) {
-      if (noteId) {
-        const updatedNoteList = noteList.filter(note => note.id !== noteId)
+      if (currentNote.id) {
+        const updatedNoteList = noteList.filter(note => note.id !== currentNote.id)
         setNoteList(updatedNoteList)
       }
-      setNoteList((prevNoteList) => ([noteToEdit, ...prevNoteList]))
       noteService.save(noteToEdit).then((note) => {
-        console.log('note saved', note);
+        setNoteList((prevNoteList) => ([note, ...prevNoteList]))
         // showSuccessMsg('Note saved!')
         // navigate('/note')
       })
@@ -55,7 +40,7 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
 
   function closeEditNote() {
     setNoteOpenWindowState(false)
-    setNoteToEdit(null)
+    setNoteToEdit(noteService.createNote())
     elInputRefTitle.current.value = ''
     elInputRefTxt.current.value = ''
   }
@@ -69,7 +54,7 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
 
   return (
     <section className="edit-note">
-      <h2>{noteId ? 'Edit note' : 'Add a new note'}</h2>
+      {/* <h2>{noteToEdit.id ? 'Edit note' : 'Add a new note'}</h2> */}
       <form onSubmit={onSaveNote}
         className='add-note-form'>
         {noteOpenWindowState &&
@@ -77,7 +62,7 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
             name="title"
             id="title"
             placeholder="Title"
-            // value={noteToEdit.title}
+            value={currentNote.title || ''}
             onChange={handleChange}
             ref={elInputRefTitle}
             className='edit-note-title'
@@ -87,7 +72,7 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
           name="txt"
           id="txt"
           placeholder="Write a note..."
-          // value={noteToEdit.txt}
+          value={currentNote.txt || ''}
           onChange={handleChange}
           onClick={openEditNote}
           ref={elInputRefTxt}

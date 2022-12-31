@@ -85,26 +85,31 @@ function _createNotes() {
   if (!notes || !notes.length) {
     notes = []
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'text',
       txt: "txttt!",
       title: "15 first txtfirstxt"
     }))
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'text',
       txt: "txt!",
       title: "second txt"
     }))
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'img',
       imgUrl: "http://some-img/me",
       title: "first img"
     }))
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'img',
       imgUrl: "http://some-img/me",
       title: "second img"
     }))
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'todos-list',
       label: "family",
       title: "first todos",
@@ -120,6 +125,7 @@ function _createNotes() {
     }
     ))
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'todos-list',
       label: "friends",
       title: "second todos",
@@ -135,11 +141,13 @@ function _createNotes() {
         }]
     }))
     notes.push(createNote({
+      id: utilService.makeId(),
       noteType: 'video',
       videoUrl: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
       title: "first video"
     })),
       notes.push(createNote({
+        id: utilService.makeId(),
         noteType: 'video',
         videoUrl: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
         title: "second video"

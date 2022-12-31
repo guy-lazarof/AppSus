@@ -53,7 +53,10 @@ export function NoteList({ filterBy }) {
                     noteListState.map((note, idx) => {
                         const { title, txt, videoUrl, imgUrl, noteType, id, todosList, backgroundColor } = note
                         return (
-                            <article key={`${idx} + ${id}`} className="note-preview" style={{ backgroundColor: backgroundColor }} onClick={() => { setNoteToEditState(note) }}>
+                            <article key={`${idx} + ${id}`} className="note-preview" style={{ backgroundColor: backgroundColor }} onClick={() => {
+                                setNoteToEditState(note)
+                                console.log(note)
+                            }}>
                                 <div className='note-pin-title'>
                                     {title && <h1> {`${title}`}</h1>}
                                     {/* <Link to={`/note/${note.id}`}> Edit</Link> */}
