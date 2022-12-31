@@ -11,7 +11,7 @@ export const utilService = {
     convertTimestampToHour,
 }
 
-function makeId(length = 6) {
+function makeId(length = 10) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
@@ -78,21 +78,20 @@ function convertTimestampToHour(timestamp) {
     let hours = date.getHours();
     let minutes = date.getMinutes();
     let ampm = 'AM'
-  
+
     // Convert hours to 12-hour format
     if (hours > 12) {
-      hours -= 12
-      ampm = 'PM'
+        hours -= 12
+        ampm = 'PM'
     } else if (hours === 0) {
-      // Convert 0 to 12
-      hours = 12
+        // Convert 0 to 12
+        hours = 12
     }
-  
+
     // Add leading zeroes to minutes if needed
     if (minutes < 10) {
-      minutes = `0${minutes}`
+        minutes = `0${minutes}`
     }
-  
+
     return `${hours}:${minutes} ${ampm}`
-  }
-  
+}
