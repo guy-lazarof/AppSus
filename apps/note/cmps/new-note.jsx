@@ -4,7 +4,7 @@ import { noteService } from '../services/note.service.js';
 const { useState, useEffect, useRef } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
-export function NewNote({ setNoteList, noteListPageRef }) {
+export function NewNote({ setNoteList }) {
   const [newNoteState, setNewNoteState] = useState(noteService.createNote())
   const [newNoteOpenWindowState, setNewNoteOpenWindowState] = useState(false)
   const elInputRefTitle = useRef(null)

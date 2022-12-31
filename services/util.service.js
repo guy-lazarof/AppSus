@@ -11,7 +11,7 @@ export const utilService = {
     convertTimestampToHour,
 }
 
-function makeId(length = 10) {
+function makeId(length = 6) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 

@@ -2,6 +2,7 @@ import { utilService } from '../../../services/util.service.js';
 import { noteService } from '../services/note.service.js';
 import { NewNote } from './new-note.jsx';
 
+
 const { Link } = ReactRouterDOM
 const { useState, useEffect, useRef } = React
 
@@ -48,10 +49,10 @@ export function NoteList({ filterBy }) {
             < div className="grid-note-list-container" >
 
                 {noteListState.length ?
-                    noteListState.map(note => {
-                        const { title, txt, videoUrl, imgUrl, noteType, todosList, backgroundColor } = note
+                    noteListState.map((note, idx) => {
+                        const { title, txt, videoUrl, imgUrl, noteType, id, todosList, backgroundColor } = note
                         return (
-                            <article key={utilService.makeId()} className="note-preview" style={{ backgroundColor: backgroundColor }} >
+                            <article key={`${idx} + ${id}`} className="note-preview" style={{ backgroundColor: backgroundColor }}  >
                                 <div className='note-pin-title'>
                                     {title && <h1> {`${title}`}</h1>}
                                     <li onClick={() => onSetFilter('pin')}><i className="note-pin-icon fa-solid fa-thumbtack"></i></li>
@@ -70,6 +71,7 @@ export function NoteList({ filterBy }) {
                                     <li onClick={() => onSetbackgroundColor()}><i className="fa-solid fa-palette"></i></li>
                                 </div>
                             </article >
+                            //     { noteEditState && <NewNote setNoteList={setNoteListState} /> }
                         )
                     }) :
                     <h2> No notes to display</h2>
