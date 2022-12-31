@@ -27,7 +27,7 @@ export function MailApp() {
         setFilterBy(filterByFromFilter)
     }
 
-    return <section className="mail-main-layout"><MailSearch mails={mails} onSetFilter={onSetFilter}
+    return <section className="mail-app"><MailSearch mails={mails} onSetFilter={onSetFilter}
      isLoading={isLoading} />
         <MailIndex mails={mails} onSetFilter={onSetFilter} isLoading={isLoading} loadMails={loadMails} setMails={setMails} filterBy={filterBy} />
     </section>

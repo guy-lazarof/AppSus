@@ -17,12 +17,3 @@
 @import '../cmps/mail-compose.css';
 @import '../cmps/mail-filter.css';
 @import '../cmps/mail-search.css';
-
-
-  
-@media (max-width: 780px) {
-    .mail-main-layout {
-      width: 100%;
-      width: 600px;
-    }
-  }
