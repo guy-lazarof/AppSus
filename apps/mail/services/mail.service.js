@@ -124,7 +124,7 @@ function _createMails() {
                 author: "Pickle Rick",
                 id: 'e103',
                 subject: 'New feature release: XYZ',
-                body: 'We are excited to announce the release of a new feature for our plew feature for our platform: XYZ. This feature will allow users to atform: XYZ. This feature will allow users to [description of feature] and is now available for all users. To access the new feature, simply log in to your account and navigate to the [relevant section of the platform]. We hope you enjoy using this new tool and find it helpful in your work. Best regards, A.B.Yeoshoa"',
+                body: 'We are excited to announce the release of a new feature for our platform: XYZ. This feature will allow users to [description of feature] and is now available for all users. To access the new feature, simply log in to your account and navigate to the [relevant section of the platform]. We hope you enjoy using this new tool and find it helpful in your work. Best regards, A.B.Yeoshoa"',
                 isRead: true,
                 sentAt: 1556133930593,
                 from: 'user@appsus.com',
