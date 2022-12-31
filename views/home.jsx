@@ -8,11 +8,11 @@ export function Home() {
             <Link to={`/mail`}>
                 <div className="home feature"><h2>Mail</h2>
                     <p>Manage your emails and stay organized.</p>
-                    <img src ='/assets/img/gmail.png'></img>
+                    <img src ='./assets/img/gmail.png'></img>
                     </div> </Link>
             <Link to={`/note`}><div className="home feature"><h2>Notes</h2>
                 <p>Take notes and save important information.</p>
-                <img src ='/assets/img/keep.png'></img></div>
+                <img src ='./assets/img/keep.png'></img></div>
                 </Link>
         </div>
     </section>
