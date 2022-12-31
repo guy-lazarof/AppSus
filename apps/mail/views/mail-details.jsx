@@ -1,5 +1,6 @@
 const { useEffect, useState } = React
-const { useParams, useNavigate, useLocation } = ReactRouterDOM
+const { useParams, useNavigate} = ReactRouterDOM
+const { Link } = ReactRouterDOM
 
 
 import { emailService } from '../services/mail.service.js';
@@ -49,10 +50,12 @@ export function MailDetails() {
     if (!mail) return <div>Loading...</div>
 
     return <section className="mail-details">
-        <MailFilter />
+        {/* <MailFilter /> */}
+        <div className="logo-area"><Link to={`/mail`}>
+                    <i className="logo fa-regular fa-envelope"> Gmail</i></Link>
+                </div>
         <div className="main"><h1>{mail.subject}</h1>
-            <div className ="main-first-line flex"><span className="sender">{mail.author}
-            <i className="fa-regular fa-star"></i></span>
+            <div className ="main-first-line flex"><span className="sender">{mail.author}</span>
             <span className="trash" onClick={(event) => {
                 onRemoveMail(mail.id)
                 event.stopPropagation()

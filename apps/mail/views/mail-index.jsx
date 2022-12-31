@@ -8,19 +8,10 @@ import { emailService } from '../services/mail.service.js';
 
 
 export function MailIndex({ mails, onSetFilter, isLoading, loadMails,
-    setMails, filterBy, onMarkMail, onImportantMail }) {
+    setMails, filterBy}) {
 
     const [markedEmails, setMarkedEmails] = useState([])
 
-    function onImportantMail(mailId) {
-        const updatedMails = mails.map(mail => {
-            if (mail.id === mailId) {
-                return { ...mail, isImportant: !mail.isImportant }
-            }
-            return mail
-        })
-        setMails(updatedMails);
-    }
     function onRemoveMail(mailId) {
         const isMarked = markedEmails.includes(mailId)
         if (isMarked) {
@@ -43,28 +34,27 @@ export function MailIndex({ mails, onSetFilter, isLoading, loadMails,
         }
       }
       
-
-
-
-    function onMarkMail(mailId) {
-        const updatedMails = mails.map(mail => {
-            if (mail.id === mailId) {
-                return { ...mail, isRead: !mail.isRead }
-            }
-            return mail
-        })
-        setMails(updatedMails);
-    }
-
-    function onStarMail(mailId) {
-        const updatedMails = mails.map(mail => {
-            if (mail.id === mailId) {
+    function onStarMail(mailId, attribute) {
+        const updatedMails = mails.map((mail) => {
+          if (mail.id === mailId) {
+            switch (attribute) {
+              case 'star':
                 return { ...mail, isStar: !mail.isStar }
+              case 'read':
+                return { ...mail, isRead: !mail.isRead }
+              case 'important':
+                return { ...mail, isImportant: !mail.isImportant }
+              default:
+                return mail
             }
-            return mail
+          }
+          return mail
         })
-        setMails(updatedMails);
-    }
+        const updatedMail = updatedMails.find((mail) => mail.id === mailId)
+        emailService.save(updatedMail)
+        setMails(updatedMails)
+      }
+      
 
     function onSaveMail(mailToSave) {
         const newMail = { ...mailToSave }
@@ -73,15 +63,14 @@ export function MailIndex({ mails, onSetFilter, isLoading, loadMails,
                 loadMails()
             })
             .catch((err) => {
-                console.log('err:', err);
+                console.log('err:', err)
             })
     }
 
     return <section className="mail-index full main-layout">
         {!isLoading && <MailFilter mails={mails} onSaveMail={onSaveMail} onSetFilter={onSetFilter} filterBy={filterBy} />}
         {!isLoading && <MailList mails={mails} onRemoveMail={onRemoveMail} onStarMail={onStarMail}
-            onMarkMail={onMarkMail} onImportantMail={onImportantMail}
-            markedEmails={markedEmails} setMarkedEmails={setMarkedEmails} />}
+            markedEmails={markedEmails} setMarkedEmails={setMarkedEmails}  />}
 
     </section>
 }

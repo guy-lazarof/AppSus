@@ -13,27 +13,40 @@
     min-width: 15em;
     margin-left: 1em;
 }
-
 .search-form {
-    background-color: #cccccc;
-    border-radius: 1em;
-    min-height: 2em;
-}
-
-.search-form .search-mail {
-    background-color: #cccccc;
-    border: 0;
-    border-radius: 16px;
-    min-height: 2em;
-}
-
-.search-form .search-mail:focus {
     background-color: #ffffff;
-}
-
-.header .search-form select,
-.header .search-form button {
-    border: none;
-    border-radius: 16px;
-    background-color: #cccccc;
-}
+    border: .1em solid #e2e2e2;
+    border-radius: .25em;
+    display: flex;
+    align-items: center;
+    height: 2em;
+  }
+  
+  .search-form .search-mail {
+    border: 0;
+    border-radius: .25em;
+    flex-grow: 1;
+    height: 100%;
+    padding: 0 .8em;
+  }
+  
+  .search-form .search-mail:focus {
+    outline: none;
+  }
+  
+  .header .search-form select,
+  .header .search-form button {
+    border: 0;
+    border-radius: .25em;
+    background-color: #ffffff;
+    font-size: .9em;
+    line-height: 2em;
+    color: #212121;
+    height: 100%;
+    padding: 0 .8em;
+    cursor: pointer;
+  }
+  
+  .header .search-form button:hover {
+    background-color: #f5f5f5;
+  }

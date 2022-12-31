@@ -3,7 +3,7 @@ const { useState, useEffect } = React
 
 import { EmailPreview } from './email-preview.jsx';
 
-export function MailList({ mails, onRemoveMail, onStarMail, onMarkMail, onImportantMail, markedEmails, setMarkedEmails }) {
+export function MailList({ mails, onRemoveMail, onStarMail, markedEmails, setMarkedEmails }) {
 
     
 
@@ -11,7 +11,6 @@ export function MailList({ mails, onRemoveMail, onStarMail, onMarkMail, onImport
         {
             mails.map(mail => <table key={mail.id} className="mail-list">
                 <EmailPreview mail={mail} onRemoveMail={onRemoveMail} onStarMail={onStarMail}
-                 onMarkMail={onMarkMail} onImportantMail={onImportantMail} 
                  markedEmails={markedEmails} setMarkedEmails={setMarkedEmails}/>
             </table>)
         }

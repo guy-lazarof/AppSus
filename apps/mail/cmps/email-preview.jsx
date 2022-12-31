@@ -4,8 +4,8 @@ const { useState, useEffect } = React
 
 import { utilService } from '../../../services/util.service.js';
 
-export function EmailPreview({ mail, onRemoveMail, onStarMail, onMarkMail
-    , onImportantMail, markedEmails, setMarkedEmails }) {
+export function EmailPreview({ mail, onRemoveMail, onStarMail
+    ,markedEmails, setMarkedEmails }) {
 
     const [isRowClicked, setIsRowClicked] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
@@ -30,13 +30,13 @@ export function EmailPreview({ mail, onRemoveMail, onStarMail, onMarkMail
     return <tbody>
         <tr className={`mail-preview flex space-between align-center ${isRowClicked ? 'clicked' : ''}`} >
 
-            <td onClick={() => { onMarkRow(mail.id) }}>
+            <td className = "squares" onClick={() => { onMarkRow(mail.id) }}>
                 {isRowClicked ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square"></i>}</td>
 
-            <td onClick={() => { onStarMail(mail.id) }}>
+            <td className = "squares" onClick={() => { onStarMail(mail.id, 'star') }}>
                 <i className={isMailStar ? "fa-regular fa-star gold" : "fa-regular fa-star"}></i></td>
 
-            <td onClick={() => { onImportantMail(mail.id) }}>
+            <td className = "squares" onClick={() => { onStarMail(mail.id, 'important') }}>
                 <i className={isMailImportant ? "important label fa-solid fa-tag" : "label fa-solid fa-tag"}></i></td>
 
             <td className="main-line" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} >
@@ -49,7 +49,7 @@ export function EmailPreview({ mail, onRemoveMail, onStarMail, onMarkMail
                         event.stopPropagation()
                     }}></i>}</span></span>
                 <span>{isHovered && <i className="fa-regular fa-envelope" onClick={(event) => {
-                    onMarkMail(mail.id)
+                    onStarMail(mail.id, 'read')
                     event.stopPropagation()
                 }}></i>}</span></td>
         </tr></tbody>
