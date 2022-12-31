@@ -12,6 +12,12 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
 
   let currentNote = noteToEdit
 
+  useEffect(() => {
+    if (currentNote.id) {
+      openEditNote()
+      elInputRefTxt.current.focus()
+    }
+  }, [currentNote])
   function handleChange({ target }) {
     let { value, name: field } = target
     setNoteToEdit((prevNote) => ({ ...prevNote, [field]: value }))
