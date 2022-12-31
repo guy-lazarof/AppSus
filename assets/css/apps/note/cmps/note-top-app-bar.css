@@ -1,9 +1,10 @@
 .top-app-bar{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
 justify-content: space-around;
 align-items: center;
-
+border-bottom: #dadce0 1px solid;
+margin-bottom: 30px;
 }
 .note-logo{
   font-size: 30px;
@@ -17,27 +18,32 @@ align-items: center;
     color: #5f6368;
 }
 .note-logo-icon{
-  background-color: rgb(255, 221, 98);
+  background-color: #fcbc06;
   padding: 10px;
   border-radius: 10px;
-  font-size: 40px;
+  color: #f5f5f5;
 
 }
+
 .note-filter{
   flex-grow: 4;
 }
 
 .note-search {
   font: normal 16px Google Sans,Roboto,Helvetica,Arial,sans-serif;
-  border-radius: 10px;
+  border-radius: 8px;
   border: solid 1px #f5f5f5;
+  background-color: #f2f3f4;
  width: 80%;
  margin: 10px;
  height: 2.5rem;
- box-shadow: 1px 1px 1px 1px rgba(118, 117, 117, 0.8)
+ /* box-shadow: 1px 1px 1px 1px rgba(118, 117, 117, 0.8) */
  
 }
+
+
 .note-filter-select{
+  background-color: #f2f3f4;
   font: normal 16px Google Sans,Roboto,Helvetica,Arial,sans-serif;
   border-radius: 10px;
   border: solid 1px #f5f5f5;
@@ -54,4 +60,5 @@ align-items: center;
 .note-top-buttons > i {
   margin: 10px;
   font-size: 20px;
+  color: #3b3b3b;
 }

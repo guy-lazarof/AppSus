@@ -12,6 +12,7 @@ export const noteService = {
   save,
   getEmptyNote,
   getDefaultFilter,
+  createNote
 }
 
 function query(filterBy = getDefaultFilter()) {
@@ -22,7 +23,6 @@ function query(filterBy = getDefaultFilter()) {
         notes = notes.filter(note => regex.test(note.title))
       }
       if (filterBy.noteType === 'all') {
-        console.log('allNotes:', notes)
         return notes
       }
       notes = notes.filter(note => note.noteType === filterBy.noteType)
@@ -43,9 +43,10 @@ function remove(noteId) {
 }
 
 function save(note) {
-  if (note.id) {
-    return storageService.put(NOTE_KEY, note)
-  } else {
+  // if (note.id) {
+  //   return storageService.put(NOTE_KEY, note)
+  // } else
+  {
     return storageService.post(NOTE_KEY, note)
   }
 }
@@ -69,27 +70,11 @@ function getDefaultFilter() {
   return { txt: '', noteType: 'all' }
 }
 
-// const emptyNote = {
-//   id: null,
-//   noteType: "text",
-//   backgroundColor: "white",
-//   txt: null,
-//   isPinned: false,
-//   title: null,
-//   lable: null,
-
-//   imgUrl: null,
-//   videoUrl: null
-// }
-
-function _createNote(arg) {
+function createNote(arg) {
   const note = getEmptyNote()
   note.id = utilService.makeId()
   for (const property in arg) {
     note[property] = arg[property]
-    // console.log('property:', property)
-    // console.log('note.property', note.property)
-    // console.log('arg[property]:', arg[property])
   }
   return note
 }
@@ -100,27 +85,27 @@ function _createNotes() {
   let notes = utilService.loadFromStorage(NOTE_KEY)
   if (!notes || !notes.length) {
     notes = []
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'text',
       txt: "txttt!",
       title: "15 first txtfirstxt"
     }))
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'text',
       txt: "txt!",
       title: "second txt"
     }))
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'img',
       imgUrl: "http://some-img/me",
       title: "first img"
     }))
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'img',
       imgUrl: "http://some-img/me",
       title: "second img"
     }))
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'todos-list',
       label: "family",
       title: "first todos",
@@ -135,7 +120,7 @@ function _createNotes() {
         }]
     }
     ))
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'todos-list',
       label: "friends",
       title: "second todos",
@@ -150,12 +135,12 @@ function _createNotes() {
           doneAt: 187111111
         }]
     }))
-    notes.push(_createNote({
+    notes.push(createNote({
       noteType: 'video',
       videoUrl: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
       title: "first video"
     })),
-      notes.push(_createNote({
+      notes.push(createNote({
         noteType: 'video',
         videoUrl: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
         title: "second video"

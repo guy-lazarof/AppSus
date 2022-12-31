@@ -12,9 +12,6 @@ export function TopAppBar({ setFilter }) {
   function updateFilter(ev) {
     ev.preventDefault()
     let { name: field, value } = ev.target
-    console.log('field:', field)
-    console.log('target:', ev.target)
-    console.log('value:', value)
     setFilter((prevFilter) => {
       return {
         ...prevFilter,
