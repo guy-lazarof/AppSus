@@ -12,8 +12,6 @@ header {
     background-color: var(--mail-clr0);
 }
 
-
-
 nav a {
     margin: .5em;
 }
@@ -26,4 +24,9 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+}
+
+.app-header img{ 
+    width: 100px;
+    dis
 }
