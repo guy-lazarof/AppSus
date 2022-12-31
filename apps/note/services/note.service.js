@@ -1,7 +1,7 @@
-// import { utilService } from './util.service.js'
 import { storageService } from '../../../services/async-storage.service.js';
 import { utilService } from '../../../services/util.service.js';
 
+// import { utilService } from './util.service.js'
 const NOTE_KEY = 'noteDB'
 _createNotes()
 
@@ -43,10 +43,9 @@ function remove(noteId) {
 }
 
 function save(note) {
-  // if (note.id) {
-  //   return storageService.put(NOTE_KEY, note)
-  // } else
-  {
+  if (note.id) {
+    return storageService.put(NOTE_KEY, note)
+  } else {
     return storageService.post(NOTE_KEY, note)
   }
 }
@@ -72,7 +71,7 @@ function getDefaultFilter() {
 
 function createNote(arg) {
   const note = getEmptyNote()
-  note.id = utilService.makeId()
+  // note.id = utilService.makeId()
   for (const property in arg) {
     note[property] = arg[property]
   }
