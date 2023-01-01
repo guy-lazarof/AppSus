@@ -5,11 +5,12 @@ import { noteService } from '../services/note.service.js';
 const { useState, useEffect, useRef } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
-export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
+export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit, setAddImg, addImg, fileSelected, setFileSelected }) {
   const [noteOpenWindowState, setNoteOpenWindowState] = useState(false)
+
   const elInputRefTitle = useRef(null)
   const elInputRefTxt = useRef(null)
-
+  const elInputRefFile = useRef(null)
   let currentNote = noteToEdit
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
       elInputRefTxt.current.focus()
     }
   }, [currentNote])
+
   function handleChange({ target }) {
     let { value, name: field } = target
     setNoteToEdit((prevNote) => ({ ...prevNote, [field]: value }))
@@ -32,10 +34,10 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
       }
       noteService.save(noteToEdit).then((note) => {
         setNoteList((prevNoteList) => ([note, ...prevNoteList]))
-        // showSuccessMsg('Note saved!')
-        // navigate('/note')
+        setNoteToEdit((prevNote) => ({ ...prevNote, imgUrl: fileSelected }));
       })
       closeEditNote()
+      setAddImg(false)
     }
     return closeEditNote()
   }
@@ -52,15 +54,24 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
   }
 
   function validValue() {
-    if (elInputRefTitle.current.value || elInputRefTxt.current.value) return true
+    if (elInputRefTitle.current.value || elInputRefTxt.current.value || addImg) return true
     else {
       return false
     }
   }
 
+  function onAddImg() {
+    setAddImg(true)
+  }
+
+  function handleChangeFileInput(event) {
+    const file = event.target.files[0];
+    setFileSelected(URL.createObjectURL(file));
+    console.log('URL.createObjectURL(file):', URL.createObjectURL(file))
+  }
+
   return (
     <section className="edit-note">
-      {/* <h2>{noteToEdit.id ? 'Edit note' : 'Add a new note'}</h2> */}
       <form onSubmit={onSaveNote}
         className='add-note-form'>
         {noteOpenWindowState &&
@@ -84,14 +95,26 @@ export function EditNote({ noteList, setNoteList, setNoteToEdit, noteToEdit }) {
           ref={elInputRefTxt}
           className='edit-note-txt'
         />
-        {noteOpenWindowState &&
+        {addImg && <div>
 
+          <input type="file" id='file-input' accept="image/*" onChange={handleChangeFileInput} style={{ display: 'none' }} />
+          <img src={fileSelected} alt='' style={{ height: '100px', width: '100px' }} />
+        </div>
+        }
+
+        {noteOpenWindowState &&
           <div className='edit-note-edit-nav'>
-            <li onClick={() => onSetFilter('')}><i className="fa-solid fa-image"></i></li>
+            <li onClick={(event) => {
+              event.stopPropagation()
+              onAddImg()
+            }}><label htmlFor="file-input"><i className="fa-solid fa-image"></i></label></li>
             <li onClick={() => onSetbackgroundColor()}><i className="fa-solid fa-palette"></i></li>
             <button>{'Add'}</button>
           </div>}
+
       </form>
     </section>
   )
 }
+
+

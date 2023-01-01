@@ -2,7 +2,6 @@ import { utilService } from '../../../services/util.service.js';
 import { noteService } from '../services/note.service.js';
 import { EditNote } from './edit-note.jsx';
 
-
 const { Link } = ReactRouterDOM
 const { useState, useEffect, useRef } = React
 
@@ -11,6 +10,9 @@ export function NoteList({ filterBy }) {
     const [isLoadingState, setIsLoadingState] = useState(false)
     const [backgroundColorState, setBackgroundColorState] = useState(null)
     const [noteToEditState, setNoteToEditState] = useState(noteService.createNote())
+    const [addImgState, setAddImgState] = useState(false)
+    const [fileSelectedState, setFileSelectedState] = useState(null);
+
     useEffect(() => {
         loadNotes()
     }, [filterBy])
@@ -29,23 +31,16 @@ export function NoteList({ filterBy }) {
             .then(() => {
                 const updatedNoteList = noteListState.filter(note => note.id !== noteId)
                 setNoteListState(updatedNoteList)
-                // showSuccessMsg('Note removed')
             })
             .catch((err) => {
                 console.log('Had issues removing', err)
-                // showErrorMsg('Could not remove note')
             })
     }
-
-    function onSetbackgroundColor() {
-
-    }
-
 
     return (
         <div className='note-list-page'>
             <div className='note-list-add-note'>
-                <EditNote noteList={noteListState} setNoteList={setNoteListState} setNoteToEdit={setNoteToEditState} noteToEdit={noteToEditState} />
+                <EditNote noteList={noteListState} setNoteList={setNoteListState} setNoteToEdit={setNoteToEditState} noteToEdit={noteToEditState} addImg={addImgState} setAddImg={setAddImgState} fileSelected={fileSelectedState} setFileSelected={setFileSelectedState} />
             </div>
             < div className="grid-note-list-container" >
 
@@ -59,26 +54,31 @@ export function NoteList({ filterBy }) {
                             }}>
                                 <div className='note-pin-title'>
                                     {title && <h1> {`${title}`}</h1>}
-                                    {/* <Link to={`/note/${note.id}`}> Edit</Link> */}
                                     <li onClick={() => onSetFilter('pin')}><i className="note-pin-icon fa-solid fa-thumbtack"></i></li>
                                 </div>
                                 <div className='note-content' ></div>
-                                {/* {id && <div> {`id: ${id}`}</div>} */}
-                                {/* {noteType && <div> {`type: ${noteType}`}</div>} */}
                                 {txt && <div> {`${txt}`}</div>}
                                 {videoUrl && <div> {`${videoUrl}`}</div>}
-                                {imgUrl && <div> {`${imgUrl}`}</div>}
-                                {/* {todosList && <div> {`todosList: ${todosList}`}</div>} */}
+                                {imgUrl && <img src={imgUrl} alt='a' />}
 
                                 <div className='note-edit-nav'>
-                                    <li onClick={() => onRemoveNote(note.id)}><i className="fa-solid fa-trash"></i></li>
-                                    <li onClick={() => onSetFilter('')}><i className="fa-solid fa-image"></i></li>
-                                    <li onClick={() => onSetbackgroundColor()}><i className="fa-solid fa-palette"></i></li>
+                                    <li onClick={(event) => {
+                                        event.stopPropagation()
+                                        onRemoveNote(note.id)
+                                    }}><i className="fa-solid fa-trash"></i></li>
+                                    <li onClick={(event) => {
+                                        event.stopPropagation()
+                                        onAddImg()
+                                    }}><i className="fa-solid fa-image"></i></li>
+                                    <li onClick={(event) => {
+                                        event.stopPropagation()
+                                        onSetbackgroundColor()
+                                    }}><i className="fa-solid fa-palette"></i></li>
                                 </div>
                             </article >
                         )
                     }) :
-                    <h2> No notes to display</h2>
+                    <h2> You haven't notes to display</h2>
                 }
             </div >
         </div >

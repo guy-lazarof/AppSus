@@ -1,7 +1,6 @@
 import { storageService } from '../../../services/async-storage.service.js';
 import { utilService } from '../../../services/util.service.js';
 
-// import { utilService } from './util.service.js'
 const NOTE_KEY = 'noteDB'
 _createNotes()
 
@@ -26,16 +25,13 @@ function query(filterBy = getDefaultFilter()) {
         return notes
       }
       notes = notes.filter(note => note.noteType === filterBy.noteType)
-
       return notes
-
     }
     )
 }
 
 function get(noteId) {
   return storageService.get(NOTE_KEY, noteId)
-
 }
 
 function remove(noteId) {
@@ -71,14 +67,11 @@ function getDefaultFilter() {
 
 function createNote(arg) {
   const note = getEmptyNote()
-  // note.id = utilService.makeId()
   for (const property in arg) {
     note[property] = arg[property]
   }
   return note
 }
-
-
 
 function _createNotes() {
   let notes = utilService.loadFromStorage(NOTE_KEY)
@@ -87,71 +80,41 @@ function _createNotes() {
     notes.push(createNote({
       id: utilService.makeId(),
       noteType: 'text',
-      txt: "txttt!",
-      title: "15 first txtfirstxt"
+      txt: "avaScript is the world's most popular programming language JavaScript is the programming language of the Web. JavaScript is easy to learn. This tutorial will teach you JavaScript from basic to advanced. ",
+      title: "Js"
     }))
     notes.push(createNote({
       id: utilService.makeId(),
       noteType: 'text',
-      txt: "txt!",
-      title: "second txt"
+      txt: "As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications. In the following hello world example, many connections can be handled concurrently. Upon each connection, the callback is fired, but if there is no work to be done, Node.js will sleep.",
+      title: "NodeJs"
     }))
     notes.push(createNote({
       id: utilService.makeId(),
       noteType: 'img',
-      imgUrl: "http://some-img/me",
+      imgUrl: "blob:http://127.0.0.1:5500/9e9acc23-90e9-4b3c-8765-a28795d92990",
       title: "first img"
     }))
     notes.push(createNote({
       id: utilService.makeId(),
       noteType: 'img',
-      imgUrl: "http://some-img/me",
+      imgUrl: "blob:http://127.0.0.1:5500/fefd7398-886e-4707-82fe-6d8bfc4def4f",
       title: "second img"
     }))
     notes.push(createNote({
       id: utilService.makeId(),
-      noteType: 'todos-list',
-      label: "family",
-      title: "first todos",
-      todos: [
-        {
-          txt: "make dinner",
-          doneAt: null
-        },
-        {
-          txt: "make breakfast",
-          doneAt: 187111111
-        }]
+      noteType: 'text',
+      txt: "At npm, Inc., we're proud to dedicate teams of full-time employees to operating the npm Registry, enhancing the CLI, improving JavaScript security, and other projects that support and nurture a vibrant open source community.",
+      title: "Npm",
     }
     ))
     notes.push(createNote({
       id: utilService.makeId(),
-      noteType: 'todos-list',
-      label: "friends",
-      title: "second todos",
-      backgroundColor: "#dff698",
-      todos: [
-        {
-          txt: "meeting tonight",
-          doneAt: null
-        },
-        {
-          txt: "learn together",
-          doneAt: 187111111
-        }]
-    }))
-    notes.push(createNote({
-      id: utilService.makeId(),
-      noteType: 'video',
-      videoUrl: "https://youtube.com/watch?v=uF9ujvYEy5U&si=EnSIkaIECMiOmarE",
-      title: "first video"
-    })),
-      notes.push(createNote({
-        id: utilService.makeId(),
-        noteType: 'video',
-        videoUrl: "https://youtube.com/watch?v=Zc7YS6JnKxQ&si=EnSIkaIECMiOmarE",
-        title: "second video"
-      }))
+      noteType: 'text',
+      txt: "React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.",
+      title: "React",
+    }
+    ))
     utilService.saveToStorage(NOTE_KEY, notes)
   }
 }

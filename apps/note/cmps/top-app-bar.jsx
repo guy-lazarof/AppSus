@@ -5,10 +5,6 @@ export function TopAppBar({ setFilter }) {
 
   const [showFilterSelectState, setShowFilterSelectState] = useState(false)
 
-  // useEffect(() => {
-  //   elInputRef.current.focus()
-  // }, [])
-
   function updateFilter(ev) {
     ev.preventDefault()
     let { name: field, value } = ev.target
@@ -19,13 +15,14 @@ export function TopAppBar({ setFilter }) {
       }
     })
   }
+
   function showFilterSelect() {
     setShowFilterSelectState(() => true)
   }
+
   function hideFilterSelect() {
     setShowFilterSelectState(() => null)
   }
-
 
   return (
     <div className='top-app-bar'>
@@ -43,7 +40,6 @@ export function TopAppBar({ setFilter }) {
         />
 
         {showFilterSelectState &&
-
           <select
             id="noteType"
             name="noteType"
@@ -51,7 +47,6 @@ export function TopAppBar({ setFilter }) {
             onChange={updateFilter}
             className='note-filter-select'
           >
-
             <option value="all">all</option>
             <option value="text">text</option>
             <option value="todos-list">todos-list</option>
@@ -59,11 +54,6 @@ export function TopAppBar({ setFilter }) {
             <option value="video">video</option>
           </select>}
       </form>
-      <div className='note-top-buttons'>
-        <i className="fa-solid fa-gear"></i>
-        <i className="fa-regular fa-rectangle-list"></i>
-        <i className="fa-solid fa-rotate-right"></i>
-      </div>
     </div >
   )
 } 
