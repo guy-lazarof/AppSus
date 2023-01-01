@@ -40,7 +40,7 @@ export function EmailPreview({ mail, onRemoveMail, onStarMail
                 <i className={isMailImportant ? "important label fa-solid fa-tag" : "label fa-solid fa-tag"}></i></td>
 
             <td className="main-line" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} >
-                <span onClick={() => { window.location.href = `/#/mail/${mail.id}` }} className="main-mail-preview ">
+                <span onClick={() => { window.location.href = `/AppSus/#/mail/${mail.id}` }} className="main-mail-preview ">
                     <span className={isMailRead ? "mail-subject" : "mail-subject bold"}>{mail.author}</span>
                     <span className={isMailRead ? "mail-body" : "mail-body bold"}>{shortTxt}</span>
                     <span className={isMailRead ? "mail-time" : "mail-time bold"}>{sentAt}</span>
