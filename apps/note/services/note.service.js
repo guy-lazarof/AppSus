@@ -89,18 +89,18 @@ function _createNotes() {
       txt: "As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications. In the following hello world example, many connections can be handled concurrently. Upon each connection, the callback is fired, but if there is no work to be done, Node.js will sleep.",
       title: "NodeJs"
     }))
-    notes.push(createNote({
-      id: utilService.makeId(),
-      noteType: 'img',
-      imgUrl: "blob:http://127.0.0.1:5500/9e9acc23-90e9-4b3c-8765-a28795d92990",
-      title: "first img"
-    }))
-    notes.push(createNote({
-      id: utilService.makeId(),
-      noteType: 'img',
-      imgUrl: "blob:http://127.0.0.1:5500/fefd7398-886e-4707-82fe-6d8bfc4def4f",
-      title: "second img"
-    }))
+    // notes.push(createNote({
+    //   id: utilService.makeId(),
+    //   noteType: 'img',
+    //   imgUrl: "blob:http://127.0.0.1:5500/9e9acc23-90e9-4b3c-8765-a28795d92990",
+    //   title: "img"
+    // }))
+    // notes.push(createNote({
+    //   id: utilService.makeId(),
+    //   noteType: 'img',
+    //   imgUrl: "blob:http://127.0.0.1:5500/fefd7398-886e-4707-82fe-6d8bfc4def4f",
+    //   title: "img"
+    // }))
     notes.push(createNote({
       id: utilService.makeId(),
       noteType: 'text',
